@@ -18,7 +18,7 @@ export const InfoContainer = styled.div`
   height: 100%;
 
 
-  @media (min-width: 1080px) {
+  @media (min-width: 1000px) {
     display: flex;
     flex-direction: column;
 
@@ -39,9 +39,9 @@ export const InfoContainer = styled.div`
   }
 `;
 
-const appearFromDown = keyframes`
+const appearFromTop = keyframes`
   from {
-    transform: translateY(50px);
+    transform: translateY(-50px);
     opacity: 0;
   }
 
@@ -52,7 +52,7 @@ const appearFromDown = keyframes`
 `;
 
 export const FormContainer = styled.div`
-  animation: ${appearFromDown} 1s;
+  animation: ${appearFromTop} 1s;
 
   width: 50%;
   height: 100%;
@@ -74,7 +74,7 @@ export const FormContainer = styled.div`
 
       > a {
         display: block;
-        margin: 20px 0;
+        margin: 40px 0;
         width: 100%;
         text-align: right;
         color: var(--white);
@@ -105,7 +105,7 @@ export const FormContainer = styled.div`
       }
     }
 
-  @media (max-width: 1080px) {
+  @media (max-width: 1000px) {
     width: 100%;
     justify-content: space-around;
   }
@@ -114,7 +114,7 @@ export const FormContainer = styled.div`
 export const FormLogoContainer = styled.div`
   display: none;
   
-  @media (max-width: 1080px) {
+  @media (max-width: 1000px) {
     display: flex;
   }
 `;

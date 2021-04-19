@@ -1,12 +1,17 @@
-import Layout from "./components/Layout";
-import Login from "./pages/Login";
+import { BrowserRouter } from "react-router-dom";
+
+import Routes from "./routes";
 import GlobalStyle from "./styles/Global";
+
+import AuthProvider from "./hooks/auth";
 
 export default function App() {
   return (
-    <>
-      <Login />
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes />
+      </AuthProvider>
       <GlobalStyle />
-    </>
-  )
+    </BrowserRouter>
+  );
 }

@@ -19,18 +19,28 @@ export const Container = styled.div<IContainerProps>`
 
   color: #484848;
 
-  ${ props => props.isErrored && css`
-    border: 2px solid var(--red);
-  ` };
+  & + div {
+    margin-top: 30px;
+  }
 
-  ${ props => props.isFocused && css`
-    border: 2px solid var(--purple);
-    color: var(--white);
-  ` }
+  ${(props) =>
+    props.isErrored &&
+    css`
+      border: 2px solid var(--red);
+    `};
 
-  ${ props => props.isFilled && css`
-    color: var(--white);
-  ` }
+  ${(props) =>
+    props.isFocused &&
+    css`
+      border: 2px solid var(--purple);
+      color: var(--white);
+    `}
+
+  ${(props) =>
+    props.isFilled &&
+    css`
+      color: var(--white);
+    `}
 
   > input {
     background: transparent;
