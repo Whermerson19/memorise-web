@@ -1,5 +1,7 @@
 import { useRef, useCallback } from "react";
+
 import { useAuth } from "../../hooks/auth";
+import { useToast } from '../../hooks/toast'
 
 import * as yup from "yup";
 
@@ -26,12 +28,14 @@ interface IRegisterFormData {
   username: string;
   email: string;
   password: string;
+  confirm_password: string;
 }
 
 export default function Register() {
   const formRef = useRef<FormHandles>(null);
 
   const { createUser } = useAuth();
+  const { showToast } = useToast()
 
   const handleSubmit = useCallback(
     async (data: IRegisterFormData) => {
@@ -48,6 +52,9 @@ export default function Register() {
             .string()
             .required("Campo obrigatório")
             .min(8, "Senha deve conter pelo menos 8 caracteres"),
+          confirm_password: yup
+            .string()
+            .oneOf([yup.ref("password")], "Senhas não conferem"),
         });
 
         await schema.validate(data, { abortEarly: false });
@@ -56,7 +63,14 @@ export default function Register() {
           username: data.username,
           email: data.email,
           password: data.password,
+          confirm_password: data.confirm_password,
         });
+
+        showToast({
+          message: "Cadastro realizado com sucesso!",
+          type: "success"
+        });
+
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -65,8 +79,13 @@ export default function Register() {
 
           return;
         }
+        const { data } = err.response;
 
-        alert("failed");
+        showToast({
+          message: data.message,
+          type: "error"
+        })
+
       }
     },
     [createUser]
@@ -86,6 +105,13 @@ export default function Register() {
             name="password"
             icon={FiLock}
             placeholder="Senha"
+            type="password"
+          />
+
+          <Input
+            name="confirm_password"
+            icon={FiLock}
+            placeholder="Confirmar senha"
             type="password"
           />
 

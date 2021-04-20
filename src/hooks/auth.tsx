@@ -1,6 +1,5 @@
 import {
   createContext,
-  ReactNode,
   useContext,
   useCallback,
   useState,
@@ -23,6 +22,7 @@ interface ICreateCredentials {
   username: string;
   email: string;
   password: string;
+  confirm_password: string;
 }
 
 interface IAuthContext {
@@ -40,7 +40,7 @@ interface IAuthState {
 }
 
 interface IAuthProvider {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -94,11 +94,12 @@ export default function AuthProvider({ children }: IAuthProvider) {
     setData({} as IAuthState);
   }, []);
 
-  const createUser = useCallback(async ({ username, email, password }) => {
-    await api.post("/user", {
+  const createUser = useCallback(async ({ username, email, password, confirm_password }) => {
+    await api.post("/users", {
       username,
       email,
       password,
+      confirm_password
     });
   }, []);
 

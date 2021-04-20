@@ -25,7 +25,9 @@ export default function Input({ name, icon: Icon, ...rest }: IInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
-  const handleInpuFocus = useCallback(() => setIsFocused(true), []);
+  const handleInpuFocus = useCallback(() => {
+    setIsFocused(true)
+  }, []);
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
     setIsFilled(!!inputRef.current?.value);

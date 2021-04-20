@@ -1,5 +1,7 @@
 import { useRef, useCallback } from "react";
+
 import { useAuth } from "../../hooks/auth";
+import { useToast } from '../../hooks/toast'
 
 import * as yup from "yup";
 import getValidationErrors from "../../utils/getValidationErrors";
@@ -31,6 +33,7 @@ export default function Login() {
   const formRef = useRef<FormHandles>(null);
 
   const { logIn } = useAuth();
+  const { showToast } = useToast()
 
   const handleSubmit = useCallback(
     async (data: ILoginFormData) => {
@@ -46,7 +49,10 @@ export default function Login() {
 
         await logIn({ loginField: data.loginField, password: data.password });
 
-        alert("success");
+        showToast({
+          message: "Aproveite a aplicação",
+          type: "success"
+        })
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -56,14 +62,25 @@ export default function Login() {
           return;
         }
 
-        alert("failed");
+        const { data } = err.response
+
+        showToast({
+          message: data.message,
+          type: "error"
+        })
       }
     },
-    [logIn]
+    [logIn, showToast]
   );
 
   return (
     <Container>
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={2500}
+        closeOnClick
+        pauseOnHover
+      /> */}
       <InfoContainer>
         <img src={Logo} alt="Logo" />
         <h1>

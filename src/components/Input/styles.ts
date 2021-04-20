@@ -30,13 +30,13 @@ export const Container = styled.div<IContainerProps>`
   ${(props) =>
     props.isErrored &&
     css`
-      border: 2px solid var(--red);
+      border-color: var(--red);
     `};
 
   ${(props) =>
     props.isFocused &&
     css`
-      border: 2px solid var(--purple);
+      border-color: var(--purple);
       color: var(--white);
     `}
 
