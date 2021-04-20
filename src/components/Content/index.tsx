@@ -1,9 +1,13 @@
 import { Container } from './styles'
 
-export default function Content() {
+interface IContentProps {
+  children: React.ReactNode;
+}
+
+export default function Content({ children }: IContentProps) {
   return (
     <Container>
-      content
+      { children }
     </Container>
   )
 }

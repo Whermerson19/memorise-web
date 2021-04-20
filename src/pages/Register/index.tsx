@@ -1,5 +1,7 @@
 import { useRef, useCallback } from "react";
 
+import { useHistory } from 'react-router-dom'
+
 import { useAuth } from "../../hooks/auth";
 import { useToast } from '../../hooks/toast'
 
@@ -34,8 +36,10 @@ interface IRegisterFormData {
 export default function Register() {
   const formRef = useRef<FormHandles>(null);
 
+  const history = useHistory()
+
   const { createUser } = useAuth();
-  const { showToast } = useToast()
+  const { showToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: IRegisterFormData) => {
@@ -71,6 +75,8 @@ export default function Register() {
           type: "success"
         });
 
+        history.push("/")
+
       } catch (err) {
         if (err instanceof yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -88,7 +94,7 @@ export default function Register() {
 
       }
     },
-    [createUser]
+    [createUser, showToast, history]
   );
 
   return (
