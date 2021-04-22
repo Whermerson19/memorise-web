@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 
 import CardMiniature from "../../components/CardMiniature";
 
 import api from "../../services/api";
 
-import Folder from '../../assets/folder.svg';
+import Folder from "../../assets/folder.svg";
 import {
   Container,
   Content,
@@ -21,6 +21,7 @@ interface IListData {
     username: string;
     avatarURL: string;
   };
+  folderId: string;
 }
 
 interface IFolderData {
@@ -28,14 +29,46 @@ interface IFolderData {
   title: string;
 }
 
+interface ICardsData {
+  id: string;
+  front: string;
+  versus: string;
+  user: {
+    id: string;
+    username: string;
+    avatarURL: string;
+  };
+  list: {
+    id: string;
+    title: string;
+    folderId: string;
+  };
+}
+
 export default function Home() {
   const [lists, setLists] = useState<IListData[]>([]);
-  const [folders, setFolders] = useState<IFolderData[]>([])
+  const [folders, setFolders] = useState<IFolderData[]>([]);
+  const [cards, setCards] = useState<ICardsData[]>([]);
 
   useEffect(() => {
     api.get("/list").then((response) => setLists(response.data));
+    api.get("/cards").then((response) => setCards(response.data));
     api.get("/folders").then((response) => setFolders(response.data));
   }, []);
+
+  const termsOfList = useCallback(
+    (list_id: string) => {
+      return cards.filter((curr) => curr.list.id === list_id).length;
+    },
+    [cards]
+  );
+
+  const termsOfFolder = useCallback(
+    (folder_id: string) => {
+      return lists.filter((curr) => curr.folderId === folder_id).length;
+    },
+    [lists]
+  );
 
   return (
     <Container>
@@ -47,15 +80,15 @@ export default function Home() {
           </HeaderList>
 
           <CardsContainer>
-            {(lists.length > 0) ? lists.map((current) => (
+            {lists.map((current) => (
               <CardMiniature
                 key={current.id}
                 title={current.title}
                 isList
                 image={current.user.avatarURL}
-                terms={20}
+                terms={termsOfList(current.id)}
               />
-            )) : <h1>Você não possui listas ...</h1>}
+            ))}
           </CardsContainer>
         </SectionContainer>
 
@@ -66,15 +99,15 @@ export default function Home() {
           </HeaderList>
 
           <CardsContainer>
-            {(folders.length > 0) ? folders.map((current) => (
+            {folders.map((current) => (
               <CardMiniature
                 key={current.id}
                 title={current.title}
                 isList={false}
                 image={Folder}
-                terms={20}
+                terms={termsOfFolder(current.id)}
               />
-            )) : <h1>Você não possui pastas ...</h1>}
+            ))}
           </CardsContainer>
         </SectionContainer>
       </Content>
