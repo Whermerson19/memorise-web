@@ -3,8 +3,7 @@
 ### Apliação web utilizando ReactJS + Typescript
 
 ## Páginas de autenticação
-
-![LoginMemoRise](https://user-images.githubusercontent.com/68500665/115796039-743db880-a3a7-11eb-8d1c-2e7f5c180748.gif)
+![home_page](https://user-images.githubusercontent.com/68500665/115796115-a18a6680-a3a7-11eb-8c57-4ebe5c9d9a81.gif)
 
 ## Yup para validação de formulários
 
