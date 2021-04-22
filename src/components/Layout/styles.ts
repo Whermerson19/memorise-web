@@ -1,10 +1,13 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
-export const Container = styled.main`
+interface IContainerProps {
+  
+}
+
+export const Container = styled.main<IContainerProps>`
   width: 100vw;
   height: 100vh;
 
-  display: grid;
-  grid-template-columns: 250px 1fr;
-  grid-template-areas: "aside content";
+  display: flex;
+  
 `;

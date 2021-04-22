@@ -10,7 +10,7 @@ interface IUser {
   id: string;
   username: string;
   email: string;
-  avatar_url: string;
+  avatarURL: string;
 }
 
 interface ISessionCredentials {

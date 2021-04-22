@@ -1,5 +1,6 @@
 import AuthProvider from "./auth";
 import ToastProvider from "./toast";
+import LayoutProvider from "./layout";
 
 interface IAppProviderProps {
   children: React.ReactNode;
@@ -8,7 +9,9 @@ interface IAppProviderProps {
 export default function AppProvider({ children }: IAppProviderProps) {
   return (
     <AuthProvider>
-      <ToastProvider>{children}</ToastProvider>
+      <LayoutProvider>
+        <ToastProvider>{children}</ToastProvider>
+      </LayoutProvider>
     </AuthProvider>
   );
 }

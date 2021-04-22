@@ -8,6 +8,8 @@ import Content from "../Content";
 import { Container } from "./styles";
 
 export default function Layout() {
+
+
   const { user } = useAuth();
 
   return !!user ? (

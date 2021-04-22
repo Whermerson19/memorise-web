@@ -24,7 +24,7 @@ export const Container = styled.div<IContainerProps>`
   color: #484848;
 
   & + div {
-    margin-top: 30px;
+    margin-top: 20px;
   }
 
   ${(props) =>

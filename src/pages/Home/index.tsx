@@ -1,9 +1,12 @@
-import { Container } from './styles'
+import { Container, Content } from "./styles";
 
 export default function Home() {
+
   return (
     <Container>
-      <h1>home</h1>
+      <Content>
+        <h1>Content</h1>
+      </Content>
     </Container>
-  )
+  );
 }
