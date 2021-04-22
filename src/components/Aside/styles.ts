@@ -19,10 +19,11 @@ export const Container = styled.aside<IContainerProps>`
   justify-content: center;
 
   position: fixed;
-  transition: 700ms;
+  transition: 500ms;
 
   top: 0;
   left: ${ props => props.isVisible ? "0" : "-100%" };
+  opacity: ${ props => props.isVisible ? "1" : "0" };
 
   > svg {
     position: absolute;
@@ -58,7 +59,7 @@ export const Content = styled.div`
     font-weight: bold;
     cursor: pointer;
     font-size: 1.5rem;
-    transition: all 0.2s;
+    transition: 0.2s;
     margin-left: 20px;
 
     &:hover {
@@ -90,7 +91,7 @@ export const UserInfoContainer = styled.div`
 
     border: 4px solid var(--purple);
     border-radius: 50%;
-    transition: all 0.2s;
+    transition: 0.2s;
     cursor: pointer;
 
     &:hover {
@@ -110,7 +111,7 @@ export const CreateButtonContainer = styled.div`
     width: 100%;
     background: var(--purple);
     border: 0;
-    transition: all 0.2s;
+    transition: 0.2s;
     color: var(--white);
     font-weight: bold;
     font-size: 1rem;

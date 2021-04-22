@@ -19,7 +19,7 @@ export function useLayout(): ILayoutContext {
 }
 
 export default function LayoutProvider({ children }: ILayoutProvider) {
-  const [asideVisibility, setAsideVisibility] = useState(true);
+  const [asideVisibility, setAsideVisibility] = useState(false);
 
   const handleAsideVisibility = useCallback(() => {
     setAsideVisibility(!asideVisibility)
