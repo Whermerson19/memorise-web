@@ -6,6 +6,7 @@ interface ICardMiniatureProps {
   image: string;
   title: string;
   terms: number;
+  fullWidth?: boolean;
 }
 
 export default function CardMiniature({
@@ -13,9 +14,10 @@ export default function CardMiniature({
   image,
   title,
   terms,
+  fullWidth,
 }: ICardMiniatureProps) {
   return (
-    <Container isList={isList} >
+    <Container isList={isList} fullWidth={fullWidth} >
       <img src={isList ? image : Folder} alt={isList ? "Usuário" : "Pasta"}/>
       <InfoContainer>
         <h1>{title}</h1>

@@ -6,7 +6,18 @@ interface IContainerProps {
   isVisible: boolean;
 }
 
+export const BlackWindow = styled.div<IContainerProps>`
+  position: absolute;
+  width: calc(100vw - 250px);
+  height: 100%;
+
+  display: ${ prosp => prosp.isVisible ? 'block' : 'none' };
+  left: 250px; 
+
+`;
+
 export const Container = styled.aside<IContainerProps>`
+  position: relative;
   z-index: 100;
   background: #181818;
   display: flex;
@@ -190,7 +201,7 @@ export const NavContainer = styled.nav`
         margin-right: 20px;
       }
 
-      > a {
+      > p {
         font-weight: bold;
         font-size: 1rem;
         color: var(--white);

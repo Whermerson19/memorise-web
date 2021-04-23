@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useCallback,
-  useState,
-} from "react";
+import { createContext, useContext, useCallback, useState } from "react";
 import api from "../services/api";
 
 interface IUser {
@@ -81,6 +76,8 @@ export default function AuthProvider({ children }: IAuthProvider) {
     localStorage.setItem("@MemoRise:user", JSON.stringify(user));
     localStorage.setItem("@MemoRise:token", token);
 
+    api.defaults.headers.authorization = `Bearer ${token}`;
+
     setData({
       token,
       user,
@@ -94,14 +91,17 @@ export default function AuthProvider({ children }: IAuthProvider) {
     setData({} as IAuthState);
   }, []);
 
-  const createUser = useCallback(async ({ username, email, password, confirm_password }) => {
-    await api.post("/users", {
-      username,
-      email,
-      password,
-      confirm_password
-    });
-  }, []);
+  const createUser = useCallback(
+    async ({ username, email, password, confirm_password }) => {
+      await api.post("/users", {
+        username,
+        email,
+        password,
+        confirm_password,
+      });
+    },
+    []
+  );
 
   const updateUser = useCallback(
     (user: IUser) => {

@@ -1,12 +1,13 @@
 import { useAuth } from "../../hooks/auth";
 import { useLayout } from "../../hooks/layout";
 
-import { FiMenu, FiHome, FiFolder, FiList } from "react-icons/fi";
+import { useHistory } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import { FiMenu, FiHome, FiFolder, FiList } from "react-icons/fi";
 
 import Logo from "../../assets/logo.svg";
 import {
+  BlackWindow,
   Container,
   Content,
   ActionsContainer,
@@ -21,15 +22,17 @@ export default function Aside() {
   const [createMenuIsVisible, setCreateMenuIsVisible] = useState(false);
 
   const { user, logOut } = useAuth();
-  const { handleAsideVisibility, asideVisibility } = useLayout()
- 
+  const { handleAsideVisibility, asideVisibility } = useLayout();
+
+  const history = useHistory();
+
   const handleCreateMenuVisibility = useCallback(
     () => setCreateMenuIsVisible(!createMenuIsVisible),
     [createMenuIsVisible]
   );
 
   return (
-    <Container isVisible={asideVisibility} >
+    <Container isVisible={asideVisibility}>
       <FiMenu size={30} onClick={handleAsideVisibility} />
       <Content>
         <img src={Logo} alt="MemoRise" />
@@ -40,11 +43,7 @@ export default function Aside() {
             <h1>{user.username}</h1>
           </UserInfoContainer>
           <CreateButtonContainer>
-            <button
-              onClick={handleCreateMenuVisibility}
-            >
-              CRIAR
-            </button>
+            <button onClick={handleCreateMenuVisibility}>CRIAR</button>
             <OptionsCreateContainer isVisible={createMenuIsVisible}>
               <ul>
                 <li>Criar Lista</li>
@@ -56,25 +55,26 @@ export default function Aside() {
 
         <NavContainer>
           <ul>
-            <li>
+            <li onClick={() => history.push("/")}>
               <FiHome size={25} />
-              <Link to="#">Página Inicial</Link>
+              <p>Página Inicial</p>
             </li>
 
-            <li>
+            <li onClick={() => history.push("/my-folders")}>
               <FiFolder size={25} />
-              <Link to="#">Pastas</Link>
+              <p>Pastas</p>
             </li>
 
-            <li>
+            <li onClick={() => history.push("/my-lists")}>
               <FiList size={25} />
-              <Link to="#">Listas</Link>
+              <p>Listas</p>
             </li>
           </ul>
         </NavContainer>
 
         <p onClick={logOut}>SAIR</p>
       </Content>
+      <BlackWindow isVisible={asideVisibility} onClick={handleAsideVisibility} />
     </Container>
   );
 }

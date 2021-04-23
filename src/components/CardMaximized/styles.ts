@@ -1,15 +1,8 @@
 import styled from "styled-components";
 
-interface IContainerProps {
-  isList: boolean;
-  fullWidth?: boolean;
-}
-
-export const Container = styled.main<IContainerProps>`
-  width: 467px;
-  min-width: 390px;
-  max-width: 100%;
-  height: 200px;
+export const Container = styled.main`
+  width: 80%;
+  height: 130px;
 
   background: var(--gray);
 
@@ -24,7 +17,7 @@ export const Container = styled.main<IContainerProps>`
   transition: 0.2s;
 
   & + main {
-    margin-left: 20px;
+    margin-top: 20px;
   }
 
   &:hover {
@@ -35,7 +28,7 @@ export const Container = styled.main<IContainerProps>`
   > img {
     width: 90px;
     height: 90px;
-    border-radius: ${(props) => (props.isList ? "50%" : "0%")};
+    border-radius: 50%;
     margin-right: 20px;
   }
 `;

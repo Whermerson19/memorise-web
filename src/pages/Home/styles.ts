@@ -12,7 +12,7 @@ export const Container = styled.main`
   align-items: center;
   justify-content: center;
 
-  padding: 50px;
+  padding: 0 50px;
   
 `;
 
@@ -40,6 +40,8 @@ export const HeaderList = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  
+
   > h1 {
     font-size: 2rem;
   }
@@ -59,7 +61,6 @@ export const HeaderList = styled.header`
 
 export const CardsContainer = styled.div`
   width: 100%;
-
   display: flex;
 
   align-items: center;

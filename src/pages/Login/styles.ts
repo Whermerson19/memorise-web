@@ -88,7 +88,9 @@ export const FormContainer = styled.div`
 
       > p {
         text-align: right;
-
+        font-size: 1rem;
+        width: 100%;
+        
         margin: 15px 0;
 
         > a {
@@ -97,6 +99,7 @@ export const FormContainer = styled.div`
           transition: all .2s;
           margin: 0 5px;
           cursor: pointer;
+          font-size: 1rem;
 
           &:hover {
             filter: brightness(.7);
