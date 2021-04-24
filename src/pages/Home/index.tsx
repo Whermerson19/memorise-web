@@ -6,6 +6,7 @@ import api from "../../services/api";
 
 import Folder from "../../assets/folder.svg";
 import {
+  LoadContainer,
   Container,
   Content,
   SectionContainer,
@@ -47,8 +48,7 @@ export interface ICardsData {
 }
 
 export default function Home() {
-
-  const history = useHistory()
+  const history = useHistory();
 
   const [loading, setLoading] = useState(true);
 
@@ -87,50 +87,54 @@ export default function Home() {
   );
 
   return (
-    <Container>
+    <>
       {loading ? (
-        <h1>Carregando ...</h1>
+        <LoadContainer>
+          <h1>Carregando ...</h1>
+        </LoadContainer>
       ) : (
-        <Content>
-          <SectionContainer>
-            <HeaderList>
-              <h1>Listas</h1>
-              <p onClick={() => history.push("/my-lists")} >ver todas ...</p>
-            </HeaderList>
+        <Container>
+          <Content>
+            <SectionContainer>
+              <HeaderList>
+                <h1>Listas</h1>
+                <p onClick={() => history.push("/my-lists")}>ver todas ...</p>
+              </HeaderList>
 
-            <CardsContainer>
-              {lists.map((current) => (
-                <CardMiniature
-                  key={current.id}
-                  title={current.title}
-                  isList
-                  image={current.user.avatarURL}
-                  terms={termsOfList(current.id)}
-                />
-              ))}
-            </CardsContainer>
-          </SectionContainer>
+              <CardsContainer>
+                {lists.map((current) => (
+                  <CardMiniature
+                    key={current.id}
+                    title={current.title}
+                    isList
+                    image={current.user.avatarURL}
+                    terms={termsOfList(current.id)}
+                  />
+                ))}
+              </CardsContainer>
+            </SectionContainer>
 
-          <SectionContainer>
-            <HeaderList>
-              <h1>Pastas</h1>
-              <p>ver todas ...</p>
-            </HeaderList>
+            <SectionContainer>
+              <HeaderList>
+                <h1>Pastas</h1>
+                <p>ver todas ...</p>
+              </HeaderList>
 
-            <CardsContainer>
-              {folders.map((current) => (
-                <CardMiniature
-                  key={current.id}
-                  title={current.title}
-                  isList={false}
-                  image={Folder}
-                  terms={termsOfFolder(current.id)}
-                />
-              ))}
-            </CardsContainer>
-          </SectionContainer>
-        </Content>
+              <CardsContainer>
+                {folders.map((current) => (
+                  <CardMiniature
+                    key={current.id}
+                    title={current.title}
+                    isList={false}
+                    image={Folder}
+                    terms={termsOfFolder(current.id)}
+                  />
+                ))}
+              </CardsContainer>
+            </SectionContainer>
+          </Content>
+        </Container>
       )}
-    </Container>
+    </>
   );
 }

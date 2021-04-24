@@ -27,7 +27,7 @@ export const Container = styled.aside<IContainerProps>`
   height: 100vh;
 
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 
   position: fixed;
   transition: 500ms;
@@ -61,9 +61,15 @@ export const Content = styled.div`
   align-items: flex-start;
   justify-content: space-around;
 
+  padding: 1rem 0;
+
   > img {
+    width: 100%;
     max-width: 100%;
-    padding: 0 20px;
+    max-height: 4rem;
+    padding: 0 2rem;
+
+    margin: 1rem;
   }
 
   > p {
@@ -81,11 +87,10 @@ export const Content = styled.div`
 
 export const ActionsContainer = styled.div`
   width: 100%;
-
   display: flex;
   flex-direction: column;
 
-  padding: 0 20px;
+  padding: 0 1.3rem;
 `;
 
 export const UserInfoContainer = styled.div`
@@ -188,7 +193,7 @@ export const NavContainer = styled.nav`
       align-items: center;
       justify-content: flex-start;
 
-      padding: 20px;
+      padding: 1rem;
 
       transition: all 0.2s;
 
@@ -198,7 +203,7 @@ export const NavContainer = styled.nav`
       }
 
       > svg {
-        margin-right: 20px;
+        margin-right: 1rem;
       }
 
       > p {
