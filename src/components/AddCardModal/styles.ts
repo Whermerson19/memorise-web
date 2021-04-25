@@ -1,7 +1,6 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const InputContainer = styled.div`
-
   width: 100%;
 
   display: flex;
@@ -17,19 +16,18 @@ export const InputContainer = styled.div`
     font-size: 1.5rem;
     align-self: left;
   }
+`;
 
-  > textarea {
-    background: transparent;
-    width: 100%;
-    height: 130px;
-    resize: none;
-    margin: 20px;
-    font-size: 1.2rem;
-    color: var(--white);
+export const Textarea = styled.textarea`
+  background: transparent;
+  width: 100%;
+  height: 130px;
+  resize: none;
+  margin: 20px;
+  font-size: 1.2rem;
+  color: var(--white);
 
-    border-width: 0 0 3px 0;
-    border-style: solid;
-    border-color: var(--purple);
-  }
-
+  border-width: 0 0 3px 0;
+  border-style: solid;
+  border-color: var(--purple);
 `;

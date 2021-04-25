@@ -80,6 +80,7 @@ const GlobalStyle = createGlobalStyle`
 
     align-items: center;
     justify-content: center;
+    z-index: 1000;
   }
 
   .close-modal {

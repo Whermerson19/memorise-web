@@ -1,18 +1,85 @@
 import Modal from "react-modal";
-import { FiX } from 'react-icons/fi'
+import * as yup from 'yup'
+import { FiX } from "react-icons/fi";
 import Button from "../Button";
 
-import { InputContainer } from './styles'
+import { FormHandles, useField } from "@unform/core";
+import { Form } from "@unform/web";
 
+import { InputContainer, Textarea as TextAreaContainer } from "./styles";
+import { TextareaHTMLAttributes, useCallback, useEffect, useRef } from "react";
+import api from "../../services/api";
 
 interface IAddCardModal {
   isOpen: boolean;
   handleCloseModal(): void;
+  list_id: string;
+}
+
+interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  name: string;
+}
+
+interface IFormData {
+  front: string;
+  versus: string;
+}
+
+function TextArea({ name, ...rest }: ITextAreaProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const { registerField, fieldName } = useField(name);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: textareaRef.current,
+      path: "value",
+    });
+  }, [registerField, fieldName]);
+
+  return (
+    <TextAreaContainer
+      ref={textareaRef}
+      name={name}
+      maxLength={200}
+      placeholder="Digite aqui..."
+      {...rest}
+    />
+  );
 }
 
 Modal.setAppElement("#root");
+export default function AddCardModal({
+  isOpen,
+  handleCloseModal,
+  list_id
+}: IAddCardModal) {
 
-export default function AddCardModal({ isOpen, handleCloseModal }: IAddCardModal) {
+  const formRef = useRef<FormHandles>(null)
+
+  const handleSubmit = useCallback(async(data: IFormData) => {
+    try {
+      const schema = yup.object().shape({
+        front: yup.string().required().max(200),
+        versus: yup.string().required().max(200)
+      });
+
+      await schema.validate(data, { abortEarly: false });
+
+      await api.post(`/cards/list/${list_id}`, {
+        front: data.front,
+        versus: data.versus
+      });
+
+      handleCloseModal();
+    } catch(err) {
+
+      const { data } = err.response
+
+      alert(data.message)
+    }
+  }, [handleCloseModal, list_id])
 
   return (
     <Modal
@@ -21,19 +88,21 @@ export default function AddCardModal({ isOpen, handleCloseModal }: IAddCardModal
       className="Modal"
       overlayClassName="Overlay"
     >
-      <FiX size={25} className="close-modal"/>
+      <FiX size={25} className="close-modal" onClick={handleCloseModal} />
 
-      <InputContainer>
-        <h1>Frente</h1>
-        <textarea maxLength={200} placeholder="Digite aqui..." />
-      </InputContainer>
+      <Form ref={formRef} onSubmit={handleSubmit} >
+        <InputContainer>
+          <h1>Frente</h1>
+          <TextArea name="front" />
+        </InputContainer>
 
-      <InputContainer>
-        <h1>Verso</h1>
-        <textarea placeholder="Digite aqui..." />
-      </InputContainer>
+        <InputContainer>
+          <h1>Verso</h1>
+          <TextArea name="versus" />
+        </InputContainer>
 
-      <Button>Adicionar</Button>
+        <Button type="submit" >Adicionar</Button>
+      </Form>
     </Modal>
   );
 }
