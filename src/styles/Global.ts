@@ -54,6 +54,45 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+
+  .Modal {
+    width: 100%;
+    max-width: 650px;
+    padding: 3rem;
+    background: var(--gray);
+    color: var(--white);
+    border: 2px solid var(--purple);
+    position: relative;
+
+  }
+
+  .Overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background: rgba(0, 0, 0, .8);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: .2s;
+  }
+
+  .close-modal:hover {
+    filter: brightness(.8);
+  }
 `;
 
 export default GlobalStyle;

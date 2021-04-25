@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import AddCardModal from "../../components/AddCardModal";
 import CardsOfList from "../../components/CardsOfList";
+import { useAddCardModal } from "../../hooks/addCardModal";
 import api from "../../services/api";
 import { ICardsData } from "../Home";
 
@@ -18,6 +20,7 @@ interface IParams {
 
 export default function EspecificList() {
   const { list_id } = useParams<IParams>();
+  const { handleOpenModal, isOpen, handleCloseModal } = useAddCardModal()
 
   const [cards, setCards] = useState<ICardsData[]>([]);
 
@@ -29,10 +32,11 @@ export default function EspecificList() {
 
   return (
     <Container>
+      <AddCardModal isOpen={isOpen} handleCloseModal={handleCloseModal} />
       <Header>
         <h1>List Title</h1>
 
-        <button>Adicionar</button>
+        <button onClick={handleOpenModal} >Adicionar</button>
       </Header>
       <ButtonsContainer>
         <CardButton>
