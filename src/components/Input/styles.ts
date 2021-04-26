@@ -13,7 +13,7 @@ interface IErrorProps {
 export const Container = styled.div<IContainerProps>`
   background: var(--gray);
   border: 2px solid var(--gray);
-
+  width: 100%;
   display: flex;
 
   align-items: center;

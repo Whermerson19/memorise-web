@@ -9,6 +9,7 @@ import { Form } from "@unform/web";
 import { InputContainer, Textarea as TextAreaContainer } from "./styles";
 import { TextareaHTMLAttributes, useCallback, useEffect, useRef } from "react";
 import api from "../../services/api";
+import { useToast } from "../../hooks/toast";
 
 interface IAddCardModal {
   isOpen: boolean;
@@ -55,7 +56,7 @@ export default function AddCardModal({
   handleCloseModal,
   list_id
 }: IAddCardModal) {
-
+  const { showToast } = useToast()
   const formRef = useRef<FormHandles>(null)
 
   const handleSubmit = useCallback(async(data: IFormData) => {
@@ -72,14 +73,19 @@ export default function AddCardModal({
         versus: data.versus
       });
 
-      handleCloseModal();
+      formRef.current?.reset()
+
+      showToast({
+        type: "success",
+        message: "Cartão criado com sucesso!"
+      });
     } catch(err) {
 
       const { data } = err.response
 
       alert(data.message)
     }
-  }, [handleCloseModal, list_id])
+  }, [list_id, showToast])
 
   return (
     <Modal

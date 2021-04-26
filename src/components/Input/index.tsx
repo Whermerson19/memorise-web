@@ -15,7 +15,7 @@ import { Container, Error } from "./styles";
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
-  icon: React.ComponentType<IconBaseProps>;
+  icon?: React.ComponentType<IconBaseProps>;
 }
 
 export default function Input({ name, icon: Icon, ...rest }: IInputProps) {
@@ -43,7 +43,7 @@ export default function Input({ name, icon: Icon, ...rest }: IInputProps) {
 
   return (
     <Container isFocused={isFocused} isFilled={isFilled} isErrored={!!error}>
-      <Icon size={25} />
+      { Icon && <Icon size={25} />}
       <input
         ref={inputRef}
         name={name}

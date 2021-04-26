@@ -28,7 +28,7 @@ export default function List() {
           <h1>Minhas Listas</h1>
         </Title>
         <CardsContainer>
-          {myLists.map((curr) => (
+          { !!myLists.length ? (myLists.map((curr) => (
             <CardMaximized
               id={curr.id}
               key={curr.id}
@@ -36,7 +36,7 @@ export default function List() {
               image={curr.user.avatarURL}
               terms={terms(curr.id)}
             />
-          ))}
+          ))) : ( <h1>Você ainda não possui listas...</h1> )}
         </CardsContainer>
       </Content>
     </Container>

@@ -46,8 +46,8 @@ export default function Aside() {
             <button onClick={handleCreateMenuVisibility}>CRIAR</button>
             <OptionsCreateContainer isVisible={createMenuIsVisible}>
               <ul>
-                <li>Criar Lista</li>
-                <li>Criar Pasta</li>
+                <li onClick={() => history.push("/create-list")} >Criar Lista</li>
+                <li onClick={() => history.push("/create-folder")} >Criar Pasta</li>
               </ul>
             </OptionsCreateContainer>
           </CreateButtonContainer>

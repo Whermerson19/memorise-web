@@ -23,4 +23,9 @@ export const Title = styled.header`
 
 export const CardsContainer = styled.div`
   width: 100%;
+  height: 100%;
+
+  > h1 {
+    color: var(--cyan);
+  }
 `;

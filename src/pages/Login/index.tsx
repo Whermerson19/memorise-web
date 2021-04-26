@@ -75,12 +75,6 @@ export default function Login() {
 
   return (
     <Container>
-      {/* <ToastContainer
-        position="top-right"
-        autoClose={2500}
-        closeOnClick
-        pauseOnHover
-      /> */}
       <InfoContainer>
         <img src={Logo} alt="Logo" />
         <h1>

@@ -102,7 +102,7 @@ export default function Home() {
               </HeaderList>
 
               <CardsContainer>
-                {lists.map((current) => (
+                {!!lists.length ? (lists.map((current) => (
                   <CardMiniature
                     key={current.id}
                     title={current.title}
@@ -110,7 +110,7 @@ export default function Home() {
                     image={current.user.avatarURL}
                     terms={termsOfList(current.id)}
                   />
-                ))}
+                ))) : ( <h1>Você ainda não possui listas...</h1> )}
               </CardsContainer>
             </SectionContainer>
 
@@ -121,7 +121,7 @@ export default function Home() {
               </HeaderList>
 
               <CardsContainer>
-                {folders.map((current) => (
+                {!!folders.length ? (folders.map((current) => (
                   <CardMiniature
                     key={current.id}
                     title={current.title}
@@ -129,7 +129,7 @@ export default function Home() {
                     image={Folder}
                     terms={termsOfFolder(current.id)}
                   />
-                ))}
+                ))) : ( <h1>Você ainda não possui pastas...</h1> )}
               </CardsContainer>
             </SectionContainer>
           </Content>
