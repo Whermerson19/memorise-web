@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import AddCardModal from "../../components/AddCardModal";
 import CardsOfList from "../../components/CardsOfList";
+import EditCardModal from "../../components/EditCardModal";
 import { useAddCardModal } from "../../hooks/addCardModal";
 import api from "../../services/api";
 import { ICardsData, IListData } from "../Home";
@@ -58,6 +59,7 @@ export default function EspecificList() {
         <CardButton>Visualizar</CardButton>
       </ButtonsContainer>
       <Content>
+        <EditCardModal />
         {cards.map((curr) => (
           <CardsOfList
             key={curr.id}
