@@ -4,6 +4,7 @@ import AddCardModal from "../../components/AddCardModal";
 import CardsOfList from "../../components/CardsOfList";
 import EditCardModal from "../../components/EditCardModal";
 import { useAddCardModal } from "../../hooks/addCardModal";
+import { useEditCardModalContext } from "../../hooks/editCardModal";
 import api from "../../services/api";
 import { ICardsData, IListData } from "../Home";
 
@@ -22,17 +23,16 @@ interface IParams {
 export default function EspecificList() {
   const { list_id } = useParams<IParams>();
   const { handleOpenModal, isOpen, handleCloseModal } = useAddCardModal();
+  const { isVisible,  } = useEditCardModalContext();
 
   const [cards, setCards] = useState<ICardsData[]>([]);
   const [lists, setLists] = useState<IListData[]>([]);
-
-
 
   useEffect(() => {
     api
       .get(`/cards/list/${list_id}`)
       .then((response) => setCards(response.data));
-  }, [list_id, isOpen]);
+  }, [list_id, isOpen, isVisible]);
 
   useEffect(() => {
     api.get("/list").then((response) => setLists(response.data));

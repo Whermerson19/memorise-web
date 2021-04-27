@@ -8,8 +8,10 @@ interface ICardInfo {
 
 interface IEditCardModalContext {
   isVisible: boolean;
+  buttonAvailable: boolean;
   cardInfo: ICardInfo;
   handleModalVisibility(data?: ICardInfo): void;
+  handleButtonAvailability(): void;
 }
 
 interface IEditCardModalProvider {
@@ -30,21 +32,29 @@ export default function EditCardModalProvider({
   children,
 }: IEditCardModalProvider) {
   const [isVisible, setIsVisible] = useState(false);
+  const [buttonAvailable, setButtonAvailable] = useState(false);
+
   const [cardInfo, setCardInfo] = useState<ICardInfo>({} as ICardInfo);
 
   const handleModalVisibility = useCallback(
     (data: ICardInfo) => {
       setIsVisible(!isVisible);
-      setCardInfo(data ? data : {})
+      setCardInfo(data ? data : {});
     },
     [isVisible]
   );
+
+  const handleButtonAvailability = useCallback(() => {
+    if (!buttonAvailable) setButtonAvailable(true);
+  }, [buttonAvailable]);
 
   return (
     <EditCardModalContext.Provider
       value={{
         isVisible,
+        buttonAvailable,
         handleModalVisibility,
+        handleButtonAvailability,
         cardInfo,
       }}
     >

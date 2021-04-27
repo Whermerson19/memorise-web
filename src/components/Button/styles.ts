@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 
-export const Container = styled.button`
-  background: var(--purple);
+interface IContainerProps {
+  isAvailable: boolean;
+}
+
+export const Container = styled.button<IContainerProps>`
+  background: ${ props => props.isAvailable ? "var(--purple)" : "rgba(187, 134, 252, .3)" };
   font-size: 20px;
+
+  cursor: ${ props => props.isAvailable ? "pointer" : "not-allowed" };
 
   padding: 30px;
 
@@ -15,6 +21,6 @@ export const Container = styled.button`
   transition: filter .2s;
 
   &:hover {
-    filter: brightness(.8);
+    filter: ${ props => props.isAvailable ? "brightness(.8)" : ""};
   }
 `;

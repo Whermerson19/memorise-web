@@ -26,7 +26,7 @@ interface IFormData {
   versus: string;
 }
 
-function TextArea({ name, ...rest }: ITextAreaProps) {
+export function TextArea({ name, ...rest }: ITextAreaProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const { registerField, fieldName } = useField(name);

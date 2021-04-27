@@ -21,11 +21,13 @@ export const InputContainer = styled.div`
 export const Textarea = styled.textarea`
   background: transparent;
   width: 100%;
-  height: 130px;
+  max-height: 130px;
   resize: none;
   margin: 20px;
   font-size: 1.2rem;
   color: var(--white);
+
+  padding: .5rem;
 
   border-width: 0 0 3px 0;
   border-style: solid;
