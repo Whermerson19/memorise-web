@@ -13,6 +13,8 @@ export const Container = styled.main`
 
   overflow-y: auto;
 
+  padding: 3rem;
+
 `;
 
 export const Header = styled.header`

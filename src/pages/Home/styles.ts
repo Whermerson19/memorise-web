@@ -24,7 +24,6 @@ export const Container = styled.main`
   align-items: center;
   justify-content: center;
 
-  padding: 0 50px;
   
 `;
 

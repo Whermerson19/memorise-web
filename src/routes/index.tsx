@@ -7,6 +7,7 @@ import Home from "../pages/Home";
 import List from "../pages/List";
 import EspecificList from "../pages/EspecificList";
 import CreateList from "../pages/CreateList";
+import ViewCardsList from "../pages/ViewCardsList";
 
 export default function Routes() {
   return (
@@ -20,6 +21,12 @@ export default function Routes() {
       <Route path="/create-list" exact component={CreateList} isPrivate />
 
       <Route path="/list/:list_id" exact component={EspecificList} isPrivate />
+      <Route
+        path="/cards/list/:list_id"
+        exact
+        component={ViewCardsList}
+        isPrivate
+      />
     </Switch>
   );
 }

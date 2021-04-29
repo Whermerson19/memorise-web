@@ -68,7 +68,9 @@ export const HeaderContainer = styled.header`
   display: flex;
 
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  padding: 0 0 2rem 0;
 
   position: relative;
 
@@ -98,7 +100,7 @@ export const RemoveOptionsContainer = styled.div<IRemoveOptionsContainerProps>`
 
   position: absolute;
   top: -7.5px;
-  right: 0;
+  left: 0;
 
   > p {
     margin-bottom: 10px;
@@ -112,7 +114,7 @@ export const RemoveOptionsContainer = styled.div<IRemoveOptionsContainerProps>`
     > button {
       padding: 0.3rem;
 
-      :first-child {
+      :last-child {
         background: transparent;
         color: var(--white);
         border: 0;
@@ -125,7 +127,7 @@ export const RemoveOptionsContainer = styled.div<IRemoveOptionsContainerProps>`
         }
       }
 
-      :last-child {
+      :first-child {
         background: var(--purple);
         border: 0;
         color: var(--white);

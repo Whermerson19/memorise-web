@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import AddCardModal from "../../components/AddCardModal";
 import CardsOfList from "../../components/CardsOfList";
 import EditCardModal from "../../components/EditCardModal";
@@ -22,8 +22,11 @@ interface IParams {
 
 export default function EspecificList() {
   const { list_id } = useParams<IParams>();
+
+  const history = useHistory();
+
   const { handleOpenModal, isOpen, handleCloseModal } = useAddCardModal();
-  const { isVisible,  } = useEditCardModalContext();
+  const { isVisible } = useEditCardModalContext();
 
   const [cards, setCards] = useState<ICardsData[]>([]);
   const [lists, setLists] = useState<IListData[]>([]);
@@ -56,7 +59,9 @@ export default function EspecificList() {
       </Header>
       <ButtonsContainer>
         <CardButton>Estudar</CardButton>
-        <CardButton>Visualizar</CardButton>
+        <CardButton onClick={() => history.push(`/cards/list/${list_id}`)}>
+          Visualizar
+        </CardButton>
       </ButtonsContainer>
       <Content>
         <EditCardModal />

@@ -1,9 +1,9 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import * as yup from "yup";
 
 import { useToast } from "../../hooks/toast";
 
-import { FiTrash } from "react-icons/fi";
+import { FiTrash, FiX } from "react-icons/fi";
 
 import { FormHandles } from "@unform/core";
 import { Form } from "@unform/web";
@@ -31,10 +31,6 @@ interface IData {
 export default function EditCardModal() {
   const formRef = useRef<FormHandles>(null);
 
-  const [removeContainerVisibility, setRemoveContainerVisibility] = useState(
-    false
-  );
-
   const { showToast } = useToast();
 
   const {
@@ -42,7 +38,9 @@ export default function EditCardModal() {
     handleModalVisibility,
     buttonAvailable,
     handleButtonAvailability,
-    cardInfo,
+    cardInfo, 
+    removeContainerVisibility,
+    handleActivateRemoveContainerVisibility,
   } = useEditCardModalContext();
 
   const handleRemoveCard = useCallback(async () => {
@@ -54,7 +52,7 @@ export default function EditCardModal() {
         message: "Cartão deletado!",
       });
 
-      setRemoveContainerVisibility(false);
+      handleActivateRemoveContainerVisibility(false);
 
       handleModalVisibility();
     } catch (err) {
@@ -63,7 +61,12 @@ export default function EditCardModal() {
         message: "error",
       });
     }
-  }, [cardInfo.id, handleModalVisibility, showToast]);
+  }, [
+    cardInfo.id,
+    handleModalVisibility,
+    showToast,
+    handleActivateRemoveContainerVisibility,
+  ]);
 
   const handleSubmit = useCallback(
     async (data: IData) => {
@@ -109,14 +112,15 @@ export default function EditCardModal() {
           <HeaderContainer>
             <FiTrash
               size={25}
-              onClick={() => setRemoveContainerVisibility(true)}
+              onClick={() => handleActivateRemoveContainerVisibility(true)}
             />
+            <FiX size={25} onClick={() => handleModalVisibility()} />
             <RemoveOptionsContainer isVisible={removeContainerVisibility}>
               <div>
-                <button onClick={() => setRemoveContainerVisibility(false)}>
+                <button onClick={handleRemoveCard}>confirmar</button>
+                <button onClick={() => handleActivateRemoveContainerVisibility(false)}>
                   cancelar
                 </button>
-                <button onClick={handleRemoveCard}>confirmar</button>
               </div>
             </RemoveOptionsContainer>
           </HeaderContainer>

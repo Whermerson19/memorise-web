@@ -9,9 +9,11 @@ interface ICardInfo {
 interface IEditCardModalContext {
   isVisible: boolean;
   buttonAvailable: boolean;
+  removeContainerVisibility: boolean;
   cardInfo: ICardInfo;
   handleModalVisibility(data?: ICardInfo): void;
   handleButtonAvailability(): void;
+  handleActivateRemoveContainerVisibility(value: boolean): void;
 }
 
 interface IEditCardModalProvider {
@@ -33,6 +35,9 @@ export default function EditCardModalProvider({
 }: IEditCardModalProvider) {
   const [isVisible, setIsVisible] = useState(false);
   const [buttonAvailable, setButtonAvailable] = useState(false);
+  const [removeContainerVisibility, setRemoveContainerVisibility] = useState(
+    false
+  );
 
   const [cardInfo, setCardInfo] = useState<ICardInfo>({} as ICardInfo);
 
@@ -40,9 +45,15 @@ export default function EditCardModalProvider({
     (data: ICardInfo) => {
       setIsVisible(!isVisible);
       setCardInfo(data ? data : {});
+      if (buttonAvailable) setButtonAvailable(false);
+      if (removeContainerVisibility) setRemoveContainerVisibility(false);
     },
-    [isVisible]
+    [isVisible, buttonAvailable, removeContainerVisibility]
   );
+
+  const handleActivateRemoveContainerVisibility = useCallback((value: boolean) => {
+    setRemoveContainerVisibility(value);
+  }, []);
 
   const handleButtonAvailability = useCallback(() => {
     if (!buttonAvailable) setButtonAvailable(true);
@@ -53,6 +64,8 @@ export default function EditCardModalProvider({
       value={{
         isVisible,
         buttonAvailable,
+        removeContainerVisibility,
+        handleActivateRemoveContainerVisibility,
         handleModalVisibility,
         handleButtonAvailability,
         cardInfo,
