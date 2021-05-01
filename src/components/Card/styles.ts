@@ -38,6 +38,7 @@ export const FrontCard = styled.div`
   justify-content: center;
 
   border: 3px solid var(--purple);
+
 `;
 
 export const BackCard = styled.div`

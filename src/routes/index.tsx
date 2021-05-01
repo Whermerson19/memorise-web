@@ -8,6 +8,7 @@ import List from "../pages/List";
 import EspecificList from "../pages/EspecificList";
 import CreateList from "../pages/CreateList";
 import ViewCardsList from "../pages/ViewCardsList";
+import StudyCardsPage from "../pages/StudyCardsPage";
 
 export default function Routes() {
   return (
@@ -27,6 +28,7 @@ export default function Routes() {
         component={ViewCardsList}
         isPrivate
       />
+      <Route exact path="/study/list/:list_id" component={StudyCardsPage} isPrivate />
     </Switch>
   );
 }

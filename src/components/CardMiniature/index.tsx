@@ -1,7 +1,9 @@
 import { Container, InfoContainer } from "./styles";
-import Folder from '../../assets/folder.svg';
+import Folder from "../../assets/folder.svg";
+import { useHistory } from "react-router";
 
 interface ICardMiniatureProps {
+  id: string;
   isList: boolean;
   image: string;
   title: string;
@@ -10,18 +12,25 @@ interface ICardMiniatureProps {
 }
 
 export default function CardMiniature({
+  id,
   isList,
   image,
   title,
   terms,
   fullWidth,
 }: ICardMiniatureProps) {
+  const history = useHistory();
+
   return (
-    <Container isList={isList} fullWidth={fullWidth} >
-      <img src={isList ? image : Folder} alt={isList ? "Usuário" : "Pasta"}/>
+    <Container
+      onClick={() => history.push(`/list/${id}`)}
+      isList={isList}
+      fullWidth={fullWidth}
+    >
+      <img src={isList ? image : Folder} alt={isList ? "Usuário" : "Pasta"} />
       <InfoContainer>
         <h1>{title}</h1>
-        <p>{terms} items</p> 
+        <p>{terms} items</p>
       </InfoContainer>
     </Container>
   );

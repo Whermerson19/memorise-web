@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 interface IToastData {
   message: string;
   type: string;
+  timer?: number;
 }
 
 interface IToastContext {
@@ -25,9 +26,10 @@ export function useToast(): IToastContext {
 }
 
 export default function ToastProvider({ children }: IToastProvider) {
-  const showToast = useCallback(({ message, type }) => {
+  const showToast = useCallback(({ message, type, timer }) => {
     toast(message, {
       type,
+      autoClose: timer ? timer : 2000
     });
   }, []);
 
@@ -36,7 +38,6 @@ export default function ToastProvider({ children }: IToastProvider) {
       {children}
       <ToastContainer
         position="top-right"
-        autoClose={2500}
         closeOnClick
         pauseOnHover
       />

@@ -104,6 +104,7 @@ export default function Home() {
               <CardsContainer>
                 {!!lists.length ? (lists.map((current) => (
                   <CardMiniature
+                    id={current.id}
                     key={current.id}
                     title={current.title}
                     isList
@@ -123,6 +124,7 @@ export default function Home() {
               <CardsContainer>
                 {!!folders.length ? (folders.map((current) => (
                   <CardMiniature
+                    id={current.id}
                     key={current.id}
                     title={current.title}
                     isList={false}

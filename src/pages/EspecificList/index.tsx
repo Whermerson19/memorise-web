@@ -58,7 +58,7 @@ export default function EspecificList() {
         <button onClick={handleOpenModal}>Adicionar</button>
       </Header>
       <ButtonsContainer>
-        <CardButton>Estudar</CardButton>
+        <CardButton onClick={() => history.push(`/study/list/${list_id}`)} >Estudar</CardButton>
         <CardButton onClick={() => history.push(`/cards/list/${list_id}`)}>
           Visualizar
         </CardButton>
