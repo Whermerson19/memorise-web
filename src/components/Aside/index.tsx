@@ -17,12 +17,15 @@ import {
   NavContainer,
 } from "./styles";
 import { useCallback, useState } from "react";
+import { useCreateFolder } from "../../hooks/createFolderModal";
 
 export default function Aside() {
   const [createMenuIsVisible, setCreateMenuIsVisible] = useState(false);
 
   const { user, logOut } = useAuth();
   const { handleAsideVisibility, asideVisibility } = useLayout();
+
+  const { handleModalVisibility } = useCreateFolder();
 
   const history = useHistory();
 
@@ -46,8 +49,10 @@ export default function Aside() {
             <button onClick={handleCreateMenuVisibility}>CRIAR</button>
             <OptionsCreateContainer isVisible={createMenuIsVisible}>
               <ul>
-                <li onClick={() => history.push("/create-list")} >Criar Lista</li>
-                <li onClick={() => history.push("/create-folder")} >Criar Pasta</li>
+                <li onClick={() => history.push("/create-list")}>
+                  Criar Lista
+                </li>
+                <li onClick={() => handleModalVisibility(true)}>Criar Pasta</li>
               </ul>
             </OptionsCreateContainer>
           </CreateButtonContainer>
@@ -74,7 +79,10 @@ export default function Aside() {
 
         <p onClick={logOut}>SAIR</p>
       </Content>
-      <BlackWindow isVisible={asideVisibility} onClick={handleAsideVisibility} />
+      <BlackWindow
+        isVisible={asideVisibility}
+        onClick={handleAsideVisibility}
+      />
     </Container>
   );
 }

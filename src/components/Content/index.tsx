@@ -1,5 +1,6 @@
 import { FiMenu } from 'react-icons/fi'
 import { useLayout } from '../../hooks/layout'
+import CreateFolderModal from '../CreateFolderModal'
 import { Container, Header } from './styles'
 
 interface IContentProps {
@@ -12,6 +13,7 @@ export default function Content({ children }: IContentProps) {
 
   return (
     <Container>
+      <CreateFolderModal />
       <Header>
         <FiMenu size={30} onClick={handleAsideVisibility} />
       </Header>

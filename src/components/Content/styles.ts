@@ -20,7 +20,7 @@ export const Container = styled.main`
 export const Header = styled.header`
   width: 100%;
 
-  z-index: 1000;
+  z-index: 1;
 
   position: fixed;
   top: 0;
